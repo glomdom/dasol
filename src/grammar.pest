@@ -1,30 +1,30 @@
 WHITESPACE      = _{ " " | "\t" | "\n" | "\r" }
 COMMENT         = _{ comment }
 
-document        = { SOI ~ (body)* ~ EOI }
-body            = { function | variable | constant | statement | comment | function_call }
+document        =  { SOI ~ (body)* ~ EOI }
+body            =  { function | variable | constant | statement | comment | function_call }
 
-function        = { "|" ~ ident ~ "->" ~ ident ~ "[" ~ (expr | statement)* ~ "]" }
-variable        = { ident ~ "::" ~ ident ~ "->" ~ value }
-constant        = { "!" ~ ident ~ "::" ~ ident ~ "->" ~ value }
+function        =  { "|" ~ ident ~ "->" ~ ident ~ "[" ~ (expr | statement)* ~ "]" }
+variable        =  { ident ~ "::" ~ ident ~ "->" ~ value }
+constant        =  { "!" ~ ident ~ "::" ~ ident ~ "->" ~ value }
 
-statement       = { if_statement | while_loop | for_loop }
-if_statement    = { "if" ~ condition ~ "{" ~ (body)* ~ "}" }
-while_loop      = { "while" ~ condition ~ "[" ~ (body)* ~ "]" }
-for_loop        = { "for" ~ ident ~ "in" ~ range ~ "{" ~ (body)* ~ "}" }
-condition       = { "|" ~ expr ~ comparator ~ expr ~ "|" }
+statement       =  { if_statement | while_loop | for_loop }
+if_statement    =  { "if" ~ condition ~ "{" ~ (body)* ~ "}" }
+while_loop      =  { "while" ~ condition ~ "[" ~ (body)* ~ "]" }
+for_loop        =  { "for" ~ ident ~ "in" ~ range ~ "{" ~ (body)* ~ "}" }
+condition       =  { "|" ~ expr ~ comparator ~ expr ~ "|" }
 comparator      = _{ "==" | "!=" | "<" | ">" | "<=" | ">=" }
-range           = { number ~ ".." ~ number }
+range           =  { number ~ ".." ~ number }
 
-expr            = { value ~ (operator ~ value)* | function_call | indexing }
+expr            =  { value ~ (operator ~ value)* | function_call | indexing }
 operator        = _{ "+" | "-" | "*" | "/" | "&&" | "||" }
 
-function_call   = { ident ~ "(" ~ (value ~ ("," ~ value)*)? ~ ")" }
+function_call   =  { ident ~ "(" ~ (value ~ ("," ~ value)*)? ~ ")" }
 
-array           = { "[" ~ (value ~ ("," ~ value)*)? ~ "]" }
-indexing        = { ident ~ "[" ~ number ~ "]" }
+array           =  { "[" ~ (value ~ ("," ~ value)*)? ~ "]" }
+indexing        =  { ident ~ "[" ~ number ~ "]" }
 
-value           = { number | string | array | ident }
+value           =  { number | string | array | ident }
 ident           = @{ (ASCII_ALPHA | "_") ~ (ASCII_ALPHANUMERIC | "_")* }
 number          = @{ ASCII_DIGIT+ }
 string          = @{ "\"" ~ (!"\"" ~ ANY)* ~ "\"" }
