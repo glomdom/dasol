@@ -1,0 +1,19 @@
+[# example comment #]
+
+[# simple function declaration with return type of int #]
+| dumbass -> int [
+    42
+]
+
+[# define a constant #]
+! hi :: string -> "Hello"
+
+[# a while loop #]
+while |hi == "Hello"| [
+    add()
+]
+
+[# TODO: support function arguments xd #]
+| add -> int [
+    2 + 2
+]
